@@ -5,6 +5,7 @@ GraphicsMagick
 cairo
 cairo-devel
 cairomm-devel
+centos-release-scl
 libjpeg-turbo-devel
 pango
 pango-devel
