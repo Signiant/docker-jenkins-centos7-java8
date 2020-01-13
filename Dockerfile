@@ -20,24 +20,21 @@ RUN chmod +r /tmp/yum.packages.list
 RUN yum install -y -q `cat /tmp/yum.packages.list`
 
 # Install Python 3
-RUN yum install --assumeyes python3-pip
+RUN yum install --assumeyes python3-pip && \
+  ln -fs /usr/bin/python3 /usr/bin/python
 
 # Install Umpire
 RUN pip3 install umpire
+RUN python --version
 
 # Install jboss
 RUN wget http://sourceforge.net/projects/jboss/files/JBoss/JBoss-5.1.0.GA/jboss-5.1.0.GA.zip/download -O /tmp/jboss-5.1.0.GA.zip
 RUN unzip -q /tmp/jboss-5.1.0.GA.zip -d /usr/local
 RUN rm -f /tmp/jboss-5.1.0.GA.zip
 
-# Install Compass
-RUN gem update --system
-RUN gem install compass
-
 # Update node and npm
-RUN npm version && npm install -g npm@${NPM_VERSION} && npm version \
-  && npm install -g bower grunt@0.4 grunt-cli grunt-connect-proxy@0.1.10 n phantomjs-prebuilt \
-  && npm install -g n
+RUN npm version && npm install -g bower grunt@0.4 grunt-cli grunt-connect-proxy@0.1.10 n  && \
+  npm install -g phantomjs-prebuilt --unsafe-perm
 
 # We have to use this fixed version otherwise we get fatal error: socket hang up errors
 RUN npm install -g grunt-connect-proxy@0.1.10
