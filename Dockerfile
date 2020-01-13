@@ -20,7 +20,7 @@ RUN chmod +r /tmp/yum.packages.list
 RUN yum install -y -q `cat /tmp/yum.packages.list`
 
 # Install Python 3
-RUN yum install -y rh-python37
+RUN yum install -y rh-python36
 RUN cd /tmp && \
     wget https://bootstrap.pypa.io/get-pip.py && \
     python ./get-pip.py
