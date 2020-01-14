@@ -22,7 +22,7 @@ RUN yum install -y -q `cat /tmp/yum.packages.list`
 # Install Python 3
 RUN yum install --assumeyes python3-pip && \
   ln -fs /usr/bin/python3 /usr/bin/python && \
-  pip3 install --upgrade pip
+  pip3 install --upgrade pip==7.1.2
 
 # Install Umpire
 RUN pip3 install umpire
