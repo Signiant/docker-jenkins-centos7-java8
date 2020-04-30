@@ -36,6 +36,9 @@ RUN npm version && npm install -g npm@${NPM_VERSION} && npm version \
 # We have to use this fixed version otherwise we get fatal error: socket hang up errors
 RUN npm install -g grunt-connect-proxy@0.1.10
 
+# Install the AWS CLI - used by some build processes
+RUN pip install awscli
+
 # Update version of findbugs
 ENV FINDBUGS_VERSION 3.0.1
 RUN curl -fSLO http://downloads.sourceforge.net/project/findbugs/findbugs/$FINDBUGS_VERSION/findbugs-noUpdateChecks-$FINDBUGS_VERSION.tar.gz && \
