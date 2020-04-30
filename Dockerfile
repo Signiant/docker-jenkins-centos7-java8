@@ -25,13 +25,15 @@ RUN unzip -q /tmp/jboss-5.1.0.GA.zip -d /usr/local
 RUN rm -f /tmp/jboss-5.1.0.GA.zip
 
 # Install Compass
-RUN gem update --system
+RUN gem i rubygems-update -v '<3' && update_rubygems
+RUN gem install rb-inotify -v 0.9.10
 RUN gem install compass
 
 # Update node and npm
 RUN npm version && npm install -g npm@${NPM_VERSION} && npm version \
-  && npm install -g bower grunt@0.4 grunt-cli grunt-connect-proxy@0.1.10 n phantomjs-prebuilt \
-  && npm install -g n
+  && npm install -g bower grunt@0.4 grunt-cli grunt-connect-proxy@0.1.10 n \
+  && npm install -g n \
+  && npm install -g phantomjs@2.1.1 --unsafe-perm
 
 # We have to use this fixed version otherwise we get fatal error: socket hang up errors
 RUN npm install -g grunt-connect-proxy@0.1.10
